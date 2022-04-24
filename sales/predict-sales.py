@@ -31,7 +31,7 @@ st.sidebar.markdown("""Made by *Gabriel Pizzo* \
 st.markdown(""" Explorary data analysis of [Kaggle](https://www.kaggle.com/competitions/competitive-data-science-predict-future-sales) dataset 
 """)
 
-sales_train=pd.read_csv('sales_train.csv',index_col='date',parse_dates=True)
+sales_train=pd.read_csv('./sales/sales_train.csv',index_col='date',parse_dates=True)
 test=pd.read_csv('test.csv')
 sample_submission=pd.read_csv('sample_submission.csv')
 items=pd.read_csv('items.csv')
