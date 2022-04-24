@@ -3,12 +3,15 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+from sklearn.ensemble import IsolationForest
+import statsmodels.api as sm
 
 
 
 
 
-st.image('images.jpg')
+
+#st.image('images.jpg')
 st.title('Prediction sales explorary data analysis')
 
 
@@ -48,7 +51,6 @@ if st.button('Show items'):
     st.dataframe(items)
     
    
-from sklearn.ensemble import IsolationForest
 
 
 def detect_outliers(dataframe,contamination):
@@ -117,8 +119,6 @@ if st.button('Top shops in item sold'):
     
 
 #trend and seasonality decomposition
-import statsmodels.api as sm
-
 decomposition=sm.tsa.seasonal_decompose(sales_train['item_cnt_day'].resample('M').agg(['sum']),model='additive')
 
 figtrend=plt.figure(figsize=(6,4))
