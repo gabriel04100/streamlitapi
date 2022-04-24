@@ -11,7 +11,7 @@ import statsmodels.api as sm
 
 
 
-#st.image('images.jpg')
+st.image('./sales/images.jpg')
 st.title('Prediction sales explorary data analysis')
 
 
@@ -32,11 +32,11 @@ st.markdown(""" Explorary data analysis of [Kaggle](https://www.kaggle.com/compe
 """)
 
 sales_train=pd.read_csv('./sales/sales_train.csv',index_col='date',parse_dates=True)
-test=pd.read_csv('test.csv')
-sample_submission=pd.read_csv('sample_submission.csv')
-items=pd.read_csv('items.csv')
-items_category=pd.read_csv('item_categories.csv')
-shops=pd.read_csv('shops.csv')
+test=pd.read_csv('./sales/test.csv')
+sample_submission=pd.read_csv('./sales/sample_submission.csv')
+items=pd.read_csv('./sales/items.csv')
+items_category=pd.read_csv('./sales/item_categories.csv')
+shops=pd.read_csv('./sales/shops.csv')
 items_merged=pd.merge(items,items_category,on='item_category_id')
 sales_train_merged=pd.merge(sales_train,shops,on='shop_id')
 sales_train_merged=pd.merge(sales_train_merged,items_merged,on='item_id')
