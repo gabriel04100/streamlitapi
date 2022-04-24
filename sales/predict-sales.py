@@ -9,6 +9,20 @@ import numpy as np
 st.image('images.jpg')
 st.title('Prediction sales explorary data analysis')
 
+
+st.sidebar.header('Info')
+st.sidebar.write('we\'re looking at data of sales the goal is tho predict monthly number of sold items')
+
+st.sidebar.markdown("""Made by *Gabriel Pizzo* \
+
+                    [Kaggle](https://www.kaggle.com/gabrieldu69)\
+                    
+                    [Linkedin](https://www.linkedin.com/in/gabriel-pizzo-486163128/)\
+                    
+                    *gabrielpdata@gmail.com*
+                    """)
+
+
 st.markdown(""" Explorary data analysis of [Kaggle](https://www.kaggle.com/competitions/competitive-data-science-predict-future-sales) dataset 
 """)
 
