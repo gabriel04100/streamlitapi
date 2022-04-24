@@ -5,7 +5,7 @@ import seaborn as sns
 import numpy as np
 
 
-pip install matplotlib
+
 
 
 st.image('images.jpg')
