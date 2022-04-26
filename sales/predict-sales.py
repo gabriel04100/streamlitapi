@@ -121,6 +121,7 @@ if st.button('Top shops in item sold'):
 #trend and seasonality decomposition
 decomposition=sm.tsa.seasonal_decompose(sales_train['item_cnt_day'].resample('M').agg(['sum']),model='additive')
 
+#trend figure
 figtrend=plt.figure(figsize=(6,4))
 plt.title("item counts trend")
 plt.plot(sales_train['item_cnt_day'].resample('M').sum(),c='blue', lw=1,ls='--')
@@ -128,12 +129,26 @@ plt.plot(decomposition.trend.index, decomposition.trend, c='red',lw=1)
 plt.legend(["sum of item counts","trend of item count"])
 plt.xlabel('time')
 plt.ylabel('item sold')
-plt.xticks(size=3)
+plt.xticks(size=4)
+
+
+figseason=plt.figure(figsize=(15,7))
+plt.title("sales total values and trend")
+plt.plot(sales_train['item_cnt_day'].resample('M').sum(),c='blue')
+plt.plot(decomposition.seasonal.index, decomposition.seasonal, c='red')
+plt.legend(["sum of sales","seasonal sales"])
+plt.show()
+
+
 
  
 st.header('Display seasonal decomposition')
 
 if st.button('trend'):
     st.pyplot(figtrend)
+    
+    
+if st.button('seasonality component'):
+    st.pyplot(figseason)
     
 
