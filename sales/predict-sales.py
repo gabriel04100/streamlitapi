@@ -130,6 +130,7 @@ plt.legend(["sum of item counts","trend of item count"])
 plt.xlabel('time')
 plt.ylabel('item sold')
 plt.xticks(size=4)
+plt.grid()
 
 
 figseason=plt.figure(figsize=(15,7))
@@ -137,7 +138,8 @@ plt.title("sales total values and trend")
 plt.plot(sales_train['item_cnt_day'].resample('M').sum(),c='blue')
 plt.plot(decomposition.seasonal.index, decomposition.seasonal, c='red')
 plt.legend(["sum of sales","seasonal sales"])
-plt.show()
+plt.grid()
+
 
 
 
