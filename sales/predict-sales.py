@@ -32,11 +32,10 @@ st.markdown(""" Explorary data analysis of [Kaggle](https://www.kaggle.com/compe
 """)
 
 sales_train=pd.read_csv('./sales/sales_train.csv',index_col='date',parse_dates=True)
-test=pd.read_csv('./sales/test.csv')
-sample_submission=pd.read_csv('./sales/sample_submission.csv')
 items=pd.read_csv('./sales/items.csv')
 items_category=pd.read_csv('./sales/item_categories.csv')
 shops=pd.read_csv('./sales/shops.csv')
+
 items_merged=pd.merge(items,items_category,on='item_category_id')
 sales_train_merged=pd.merge(sales_train,shops,on='shop_id')
 sales_train_merged=pd.merge(sales_train_merged,items_merged,on='item_id')
@@ -84,7 +83,6 @@ sns.boxplot(data=sales_train,x="item_price")
 plt.subplot(3,1,2)
 plt.title("item count day",size=15)
 sns.boxplot(data=sales_train,x="item_cnt_day")
-
 figure2.tight_layout(pad=3.0)
 
 
@@ -92,67 +90,55 @@ figure2.tight_layout(pad=3.0)
 if st.button('item price repartition'):
     st.pyplot(figure2)
     
-  
-#top 10 categories
-top10cat=plt.figure(figsize=(8,5))
-plt.title('top category')
-plt.ylabel('Sales')
-sales_train_merged.groupby('item_category_name')['item_cnt_day'].sum().sort_values(ascending=False)[0:10].plot(kind='bar',color='Orange',ls='dashed',edgecolor='Black')  
-
-
-#top 10 shops
-top10s=plt.figure(figsize=(8,5))
-plt.title('top shops')
-plt.ylabel('Sales')
-sales_train_merged.groupby('shop_name')['item_cnt_day'].sum().sort_values(ascending=False)[0:10].plot(kind='bar',color='Red',ls='dashed',edgecolor='Black')
-
 
 
 st.header('Display biggest shops and category in sold items')
 
 
 if st.button('Top category in item sold'):
+    top10cat=plt.figure(figsize=(8,5))
+    plt.title('top category')
+    plt.ylabel('Sales')
+    sales_train_merged.groupby('item_category_name')['item_cnt_day'].sum().sort_values(ascending=False)[0:10].plot(kind='bar',color='Orange',ls='dashed',edgecolor='Black')  
     st.pyplot(top10cat)
     
 if st.button('Top shops in item sold'):
+    top10s=plt.figure(figsize=(8,5))
+    plt.title('top shops')
+    plt.ylabel('Sales')
+    sales_train_merged.groupby('shop_name')['item_cnt_day'].sum().sort_values(ascending=False)[0:10].plot(kind='bar',color='Red',ls='dashed',edgecolor='Black')
     st.pyplot(top10s)
     
 
+
+
 #trend and seasonality decomposition
 decomposition=sm.tsa.seasonal_decompose(sales_train['item_cnt_day'].resample('M').agg(['sum']),model='additive')
-
-#trend figure
-figtrend=plt.figure(figsize=(6,4))
-plt.title("item counts trend")
-plt.plot(sales_train['item_cnt_day'].resample('M').sum(),c='blue', lw=1,ls='--')
-plt.plot(decomposition.trend.index, decomposition.trend, c='red',lw=1)
-plt.legend(["sum of item counts","trend of item count"])
-plt.xlabel('time')
-plt.ylabel('item sold')
-plt.xticks(size=4)
-plt.grid()
-
-
-figseason=plt.figure(figsize=(15,7))
-plt.title("sales total values and trend")
-plt.plot(sales_train['item_cnt_day'].resample('M').sum(),c='blue')
-plt.plot(decomposition.seasonal.index, decomposition.seasonal, c='red')
-plt.legend(["sum of sales","seasonal sales"])
-plt.grid()
-
-
-
-
  
 st.header('Display seasonal decomposition')
 
 st.write("seasonal decomposition using statsmodels")
 
 if st.button('trend'):
+    figtrend=plt.figure(figsize=(6,4))
+    plt.title("item counts trend")
+    plt.plot(sales_train['item_cnt_day'].resample('M').sum(),c='blue', lw=1,ls='--')
+    plt.plot(decomposition.trend.index, decomposition.trend, c='red',lw=1)
+    plt.legend(["sum of item counts","trend of item count"])
+    plt.xlabel('time')
+    plt.ylabel('item sold')
+    plt.xticks(size=4)
+    plt.grid()
     st.pyplot(figtrend)
     st.write("there is a decreasing trend over time")
     
 if st.button('seasonality component'):
+    figseason=plt.figure(figsize=(15,7))
+    plt.title("sales total values and trend")
+    plt.plot(sales_train['item_cnt_day'].resample('M').sum(),c='blue')
+    plt.plot(decomposition.seasonal.index, decomposition.seasonal, c='red')
+    plt.legend(["sum of sales","seasonal sales"])
+    plt.grid()
     st.pyplot(figseason)
     st.write("we can see there is a heavy seasonal component in our case")
     
