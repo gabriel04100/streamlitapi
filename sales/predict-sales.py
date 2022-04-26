@@ -32,17 +32,15 @@ st.markdown(""" Explorary data analysis of [Kaggle](https://www.kaggle.com/compe
 """)
 
 @st.cache()
-def load_data():
-    sales_train=pd.read_csv('./sales/sales_train.csv',index_col='date',parse_dates=True)
-    items=pd.read_csv('./sales/items.csv')
-    items_category=pd.read_csv('./sales/item_categories.csv')
-    shops=pd.read_csv('./sales/shops.csv')
 
-    items_merged=pd.merge(items,items_category,on='item_category_id')
-    sales_train_merged=pd.merge(sales_train,shops,on='shop_id')
-    sales_train_merged=pd.merge(sales_train_merged,items_merged,on='item_id')
+sales_train=pd.read_csv('./sales/sales_train.csv',index_col='date',parse_dates=True)
+items=pd.read_csv('./sales/items.csv')
+items_category=pd.read_csv('./sales/item_categories.csv')
+shops=pd.read_csv('./sales/shops.csv')
+items_merged=pd.merge(items,items_category,on='item_category_id')
+sales_train_merged=pd.merge(sales_train,shops,on='shop_id')
+sales_train_merged=pd.merge(sales_train_merged,items_merged,on='item_id')
 
-load_data()
 
 st.header('Display data')
 
