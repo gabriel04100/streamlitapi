@@ -31,7 +31,7 @@ st.sidebar.markdown("""Made by *Gabriel Pizzo* \
 st.markdown(""" Explorary data analysis of [Kaggle](https://www.kaggle.com/competitions/competitive-data-science-predict-future-sales) dataset 
 """)
 
-@st.cache
+@st.cache()
 def load_data():
     sales_train=pd.read_csv('./sales/sales_train.csv',index_col='date',parse_dates=True)
     items=pd.read_csv('./sales/items.csv')
@@ -54,7 +54,7 @@ if st.button('Show items'):
     
    
 
-@st.cache
+@st.cache()
 def detect_outliers(dataframe,contamination):
     
 
