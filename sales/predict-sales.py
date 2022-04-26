@@ -32,7 +32,7 @@ st.markdown(""" Explorary data analysis of [Kaggle](https://www.kaggle.com/compe
 """)
 
 @st.cache
-def load_data(path)
+def load_data(path):
     return pd.read_csv(path)
 
 @st.cache
