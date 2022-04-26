@@ -40,7 +40,7 @@ def load_data_time(path):
     return pd.read_csv(path,index_col='date',parse_dates=True)
     
  
-sales_train=load_data_time('./sales/sales_train.csv',index_col='date',parse_dates=True)
+sales_train=load_data_time('./sales/sales_train.csv')
 items=load_data('./sales/items.csv')
 items_category=load_data('./sales/item_categories.csv')
 shops=load_data('./sales/shops.csv')
