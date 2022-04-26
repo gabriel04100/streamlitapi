@@ -141,7 +141,7 @@ if st.button('trend'):
     plt.xlabel('time')
     plt.ylabel('item sold')
     plt.xticks(size=4)
-    plt.grid()
+    plt.grid(color='w', linestyle='solid')
     st.pyplot(figtrend)
     st.write("there is a decreasing trend over time")
     
