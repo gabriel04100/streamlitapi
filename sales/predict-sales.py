@@ -31,15 +31,18 @@ st.sidebar.markdown("""Made by *Gabriel Pizzo* \
 st.markdown(""" Explorary data analysis of [Kaggle](https://www.kaggle.com/competitions/competitive-data-science-predict-future-sales) dataset 
 """)
 
-sales_train=pd.read_csv('./sales/sales_train.csv',index_col='date',parse_dates=True)
-items=pd.read_csv('./sales/items.csv')
-items_category=pd.read_csv('./sales/item_categories.csv')
-shops=pd.read_csv('./sales/shops.csv')
+@st.cache
+def load_data():
+    sales_train=pd.read_csv('./sales/sales_train.csv',index_col='date',parse_dates=True)
+    items=pd.read_csv('./sales/items.csv')
+    items_category=pd.read_csv('./sales/item_categories.csv')
+    shops=pd.read_csv('./sales/shops.csv')
 
-items_merged=pd.merge(items,items_category,on='item_category_id')
-sales_train_merged=pd.merge(sales_train,shops,on='shop_id')
-sales_train_merged=pd.merge(sales_train_merged,items_merged,on='item_id')
+    items_merged=pd.merge(items,items_category,on='item_category_id')
+    sales_train_merged=pd.merge(sales_train,shops,on='shop_id')
+    sales_train_merged=pd.merge(sales_train_merged,items_merged,on='item_id')
 
+load_data()
 
 st.header('Display data')
 
@@ -51,7 +54,7 @@ if st.button('Show items'):
     
    
 
-
+@st.cache
 def detect_outliers(dataframe,contamination):
     
 
@@ -132,7 +135,7 @@ if st.button('trend'):
     st.pyplot(figtrend)
     st.write("there is a decreasing trend over time")
     
-if st.button('seasonality component'):
+if st.button('seasonal component'):
     figseason=plt.figure(figsize=(15,7))
     plt.title("sales total values and trend")
     plt.plot(sales_train['item_cnt_day'].resample('M').sum(),c='blue')
