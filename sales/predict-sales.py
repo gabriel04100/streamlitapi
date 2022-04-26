@@ -31,14 +31,27 @@ st.sidebar.markdown("""Made by *Gabriel Pizzo* \
 st.markdown(""" Explorary data analysis of [Kaggle](https://www.kaggle.com/competitions/competitive-data-science-predict-future-sales) dataset 
 """)
 
-sales_train=pd.read_csv('./sales/sales_train.csv',index_col='date',parse_dates=True)
-items=pd.read_csv('./sales/items.csv')
-items_category=pd.read_csv('./sales/item_categories.csv')
-shops=pd.read_csv('./sales/shops.csv')
+@st.cache
+def load_data(path)
+    return pd.read_csv(path)
 
-items_merged=pd.merge(items,items_category,on='item_category_id')
-sales_train_merged=pd.merge(sales_train,shops,on='shop_id')
-sales_train_merged=pd.merge(sales_train_merged,items_merged,on='item_id')
+@st.cache
+def load_data_time(path):
+    return pd.read_csv(path,index_col='date',parse_dates=True)
+    
+ 
+sales_train=load_data_time('./sales/sales_train.csv',index_col='date',parse_dates=True)
+items=load_data('./sales/items.csv')
+items_category=load_data('./sales/item_categories.csv')
+shops=load_data('./sales/shops.csv')
+
+@st.cache
+def merging(df1,df2,key):
+    return pd.merge(df1,df2,key)
+ 
+items_merged=merging(items,items_category'item_category_id')
+sales_train_merged=merging(sales_train,shops,'shop_id')
+sales_train_merged=merging(sales_train_merged,items_merged,'item_id')
 
 
 st.header('Display data')
