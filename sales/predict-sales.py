@@ -47,7 +47,7 @@ shops=load_data('./sales/shops.csv')
 
 @st.cache
 def merging(df1,df2,key):
-    return pd.merge(df1,df2,key)
+    return pd.merge(df1,df2,on=key)
  
 items_merged=merging(items,items_category,'item_category_id')
 sales_train_merged=merging(sales_train,shops,'shop_id')
