@@ -133,7 +133,7 @@ st.header('Display seasonal decomposition')
 st.write("seasonal decomposition using statsmodels")
 
 if st.button('trend'):
-    figtrend=plt.figure(figsize=(6,4))
+    figtrend=plt.figure(figsize=(6,4),axisbg='#E6E6E6')
     plt.title("item counts trend")
     plt.plot(sales_train['item_cnt_day'].resample('M').sum(),c='blue', lw=1,ls='--')
     plt.plot(decomposition.trend.index, decomposition.trend, c='red',lw=1)
