@@ -16,7 +16,7 @@ st.title('Prediction sales explorary data analysis')
 
 
 st.sidebar.header('Info')
-st.sidebar.write('we\'re looking at data of sales the goal is tho predict monthly number of sold items')
+st.sidebar.write('we\'re looking at data of sales the goal is to predict monthly number of sold items')
 
 st.sidebar.markdown("""Made by *Gabriel Pizzo* \
 
@@ -144,11 +144,14 @@ plt.show()
  
 st.header('Display seasonal decomposition')
 
+st.write("seasonal decomposition using statsmodels")
+
 if st.button('trend'):
     st.pyplot(figtrend)
-    
+    st.write("there is a decreasing trend over time")
     
 if st.button('seasonality component'):
     st.pyplot(figseason)
+    st.write("we can see there is a heavy seasonal component in our case")
     
 
