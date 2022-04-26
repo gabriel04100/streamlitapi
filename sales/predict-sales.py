@@ -44,10 +44,10 @@ sales_train_merged=pd.merge(sales_train_merged,items_merged,on='item_id')
 st.header('Display data')
 
 if st.button('Show sales'):
-    st.dataframe(sales_train)
+    st.dataframe(sales_train.head(10))
 
 if st.button('Show items'):
-    st.dataframe(items)
+    st.dataframe(items.head(10))
     
    
 
